@@ -4,7 +4,7 @@ I have so far functioning code for the following problems:
 - [ ] B Correcting Cheeseburgers
 - [ ] C Knapsack in a Globalized World
 - [x] D Matrix Cypher
-- [ ] E Model Railroad
+- [x] E Model Railroad
 - [ ] F One-Way Roads
 - [x] G Formula
 - [ ] H Celestial Map
