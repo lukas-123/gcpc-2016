@@ -38,8 +38,7 @@ int main() {
         }
     }
 
-    vector<int> dist(serv_cnt, numeric_limits<int>::max());
-    vector<int> visited_cnt(serv_cnt);
+    vector<unordered_map<size_t, int>> dist(serv_cnt);
     using CurrNode = tuple<int, size_t, size_t>;
     list<CurrNode> queue = { make_tuple(0, 0, 0) };
     while (!queue.empty()) {
@@ -50,25 +49,24 @@ int main() {
         tie(curr_dist, curr_node, prev_node) = queue.front();
         queue.pop_front();
 
-        if (visited_cnt[curr_node]++ >= 2) {
-            continue;
-        }
-
-        dist[curr_node] = curr_dist;
+        dist[curr_node][prev_node] = curr_dist;
 
         if (curr_node == serv_cnt - 1) {
             break;
         }
 
         for (auto const& neighbor : graph[curr_node]) {
-            if (graph[curr_node][neighbor.first].find(prev_node) == graph[curr_node][neighbor.first].end()) {
+            if (
+                graph[curr_node][neighbor.first].find(prev_node) == graph[curr_node][neighbor.first].end() &&
+                dist[neighbor.first].find(curr_node) == dist[neighbor.first].end()
+            ) {
                 queue.push_back(make_tuple(curr_dist + proc_times[curr_node], neighbor.first, curr_node));
             }
         }
     }
 
-    if (dist.back() != numeric_limits<int>::max()) {
-        cout << (dist.back() + proc_times.back()) << endl;
+    if (dist.back().size() == 1) {
+        cout << (dist.back().begin()->second + proc_times.back()) << endl;
     } else {
         cout << "impossible" << endl;
     }
