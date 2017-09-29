@@ -9,6 +9,6 @@ I have so far functioning code for the following problems:
 - [x] G Formula
 - [ ] H Celestial Map
 - [x] I Common Knowledge
-- [ ] J Selling CPUs
+- [x] J Selling CPUs
 - [x] K Routing
 - [ ] L Maze
